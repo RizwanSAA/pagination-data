@@ -1,0 +1,43 @@
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-8 col-sm-6">
+        <table class="table table-md table-hover" cdk-table [dataSource]="dataOnPage$">
+          <ng-container cdkColumnDef="postId">
+            <th style="width: 80px;" cdk-header-cell *cdkHeaderCellDef>Post Id</th>
+            <td cdk-cell *cdkCellDef="let row">{{ row.postId }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="id">
+            <th cdk-header-cell *cdkHeaderCellDef>ID</th>
+            <td cdk-cell *cdkCellDef="let row">{{ row.id }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="name">
+            <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+            <td cdk-cell *cdkCellDef="let row">{{ row.name }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="email">
+            <th cdk-header-cell *cdkHeaderCellDef>Email</th>
+            <td cdk-cell *cdkCellDef="let row">{{ row.email }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="body">
+            <th cdk-header-cell *cdkHeaderCellDef>Body</th>
+            <td cdk-cell *cdkCellDef="let row">{{ row.body }}</td>
+          </ng-container>
+
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumn$.value"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumn$.value"></tr>
+        </table>
+      </div>
+      <div class="col-xl-3 offset-xl-9 col-lg-5 offset-lg-7 col-md-2 col-sm-2">
+        <ngb-pagination
+          [collectionSize]="tableDataSource$.value.length"
+          [pageSize]="pageSize$.value"
+          [page]="currentPage$.value"
+          (pageChange)="currentPage$.next($event)"
+          [directionLinks]="false"
+          [maxSize]="8"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</section>
